@@ -11,7 +11,11 @@
     "react-native/react-native": true
   },
   "rules": {
+    "linebreak-style": ["error", "unix"],
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "eqeqeq": "error",
+    "no-console": "off",
+    "no-unused-vars": "warn"
   }
 }
