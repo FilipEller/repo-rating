@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     width,
     height,
   },
+  heading: {
+    alignSelf: 'center',
+    paddingBottom: 15,
+  },
 })
 
 const Main = () => {
@@ -24,7 +28,9 @@ const Main = () => {
     <View>
       <AppBar />
       <View style={styles.container}>
-        <Subheading color='primary'>Rate Repository Application</Subheading>
+        <Subheading color='primary' style={styles.heading}>
+          Rate Repository Application
+        </Subheading>
         <RepositoryList />
       </View>
     </View>

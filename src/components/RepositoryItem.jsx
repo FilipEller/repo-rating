@@ -1,5 +1,7 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import Text from './Text'
+import Subheading from './Subheading'
+import StatBar from './StatBar'
 import theme from '../theme'
 
 const styles = StyleSheet.create({
@@ -11,21 +13,59 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingVertical: 10,
+    borderColor: theme.colors.debugBorder,
+    // borderWidth: 1,
+  },
+  headerInfo: {
+    paddingHorizontal: 20,
+    borderColor: theme.colors.debugBorder,
+    // borderWidth: 1,
+    flexGrow: 1,
+  },
   property: {
-    paddingVertical: 5,
+    paddingBottom: 5,
+    flexShrink: 1,
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  image: {
+    width: 45,
+    height: 45,
+    borderRadius: 5,
+  },
+  language: {
+    backgroundColor: theme.colors.primary,
+    padding: 4,
+    borderRadius: 3,
+    marginVertical: 5,
+    paddingHorizontal: 7,
   },
 })
 
 const RepositoryItem = ({ item }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.property}>Full name: {item.fullName}</Text>
-      <Text style={styles.property}>Description: {item.description}</Text>
-      <Text style={styles.property}>Language: {item.language}</Text>
-      <Text style={styles.property}>Stars: {item.stargazersCount}</Text>
-      <Text style={styles.property}>Forks: {item.forksCount}</Text>
-      <Text style={styles.property}>Reviews: {item.reviewCount}</Text>
-      <Text style={styles.property}>Rating: {item.ratingAverage}</Text>
+      <View style={styles.header}>
+        <Image source={{ uri: item.ownerAvatarUrl }} style={styles.image} />
+        <View style={styles.headerInfo}>
+          <Subheading style={styles.property}>{item.fullName}</Subheading>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.property} color='secondary'>
+              {item.description}
+            </Text>
+          </View>
+          <Text
+            style={[styles.language, { alignSelf: 'flex-start' }]}
+            color='dark'>
+            {item.language}
+          </Text>
+        </View>
+      </View>
+      <StatBar item={item} />
     </View>
   )
 }
