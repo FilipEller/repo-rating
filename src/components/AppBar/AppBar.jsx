@@ -6,7 +6,7 @@ import AppBarItem from './AppBarItem'
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    paddingBottom: 10,
+    paddingBottom: 3,
     backgroundColor: theme.elevation[3],
   },
 })
