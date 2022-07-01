@@ -1,11 +1,14 @@
-import { Pressable } from 'react-native'
+import { View } from 'react-native'
+import { Link } from 'react-router-native'
 import Text from '../Text'
 
-const AppBar = ({ text }) => {
+const AppBar = ({ text, route }) => {
   return (
-    <Pressable>
-      <Text bold>{text}</Text>
-    </Pressable>
+    <View>
+      <Link to={route}>
+        <Text>{text}</Text>
+      </Link>
+    </View>
   )
 }
 

@@ -1,6 +1,9 @@
 import { StyleSheet, View, Dimensions } from 'react-native'
+import { Route, Routes, Navigate } from 'react-router-native'
+
 import Subheading from './Subheading'
 import AppBar from './AppBar/AppBar'
+import SignIn from './SignIn'
 import theme from '../theme'
 
 import RepositoryList from './RepositoryList'
@@ -31,7 +34,11 @@ const Main = () => {
         <Subheading color='primary' style={styles.heading}>
           Rate Repository Application
         </Subheading>
-        <RepositoryList />
+        <Routes>
+          <Route path='/' element={<RepositoryList />} exact />
+          <Route path='/signin' element={<SignIn />} exact />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
       </View>
     </View>
   )

@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarItem text={'Repositories'} />
-      <AppBarItem text={'Account'} />
-      <AppBarItem text={'About'} />
+      <AppBarItem text={'Repositories'} route={'/'} />
+      <AppBarItem text={'Account'} route={'/signin'} />
+      <AppBarItem text={'About'} route={'/signin'} />
     </View>
   )
 }
