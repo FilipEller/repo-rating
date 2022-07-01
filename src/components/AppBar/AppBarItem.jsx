@@ -1,10 +1,16 @@
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Link } from 'react-router-native'
 import Text from '../Text'
 
+const styles = StyleSheet.create({
+  item: {
+    paddingHorizontal: 20,
+  },
+})
+
 const AppBar = ({ text, route }) => {
   return (
-    <View>
+    <View style={styles.item}>
       <Link to={route}>
         <Text>{text}</Text>
       </Link>
