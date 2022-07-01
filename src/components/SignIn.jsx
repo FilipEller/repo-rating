@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.elevation[1],
     paddingHorizontal: 10,
     paddingVertical: 15,
-  }
+  },
 })
 
 const SignIn = () => {
@@ -36,16 +36,8 @@ const SignIn = () => {
       validationSchema={validationSchema}>
       {({ handleSubmit }) => (
         <View style={styles.container}>
-          <FormikTextInput
-            name='username'
-            placeholder='Username'
-            style={styles.input}
-          />
-          <FormikTextInput
-            name='password'
-            placeholder='Password'
-            style={styles.input}
-          />
+          <FormikTextInput name='username' placeholder='Username' />
+          <FormikTextInput name='password' placeholder='Password' />
           <Button onPress={handleSubmit} text='Sign in' />
         </View>
       )}
