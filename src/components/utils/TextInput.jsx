@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
     padding: 10,
   },
+  noError: {
+    marginBottom: 26,
+  },
   error: {
     borderColor: '#EB6D59',
   },
@@ -17,7 +20,7 @@ const styles = StyleSheet.create({
 const TextInput = ({ style, error, errorStyle, ...props }) => {
   const textInputStyle = error
     ? [styles.input, style, styles.error, errorStyle]
-    : [styles.input, style]
+    : [styles.input, styles.noError, style]
 
   return (
     <NativeTextInput

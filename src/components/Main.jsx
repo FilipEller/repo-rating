@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.elevation[0],
     width,
     height,
+    paddingBottom: 50,
   },
   heading: {
     alignSelf: 'center',
