@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native'
 import Statistic from './Statistic'
-import theme from '../theme'
+import theme from '../../theme'
 
 const styles = StyleSheet.create({
   stats: {

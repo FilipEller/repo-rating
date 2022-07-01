@@ -1,6 +1,6 @@
 import { StyleSheet, View, Dimensions } from 'react-native'
 import Subheading from './Subheading'
-import AppBar from './AppBar'
+import AppBar from './AppBar/AppBar'
 import theme from '../theme'
 
 import RepositoryList from './RepositoryList'

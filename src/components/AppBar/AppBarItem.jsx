@@ -1,5 +1,5 @@
 import { Pressable } from 'react-native'
-import Text from './Text'
+import Text from '../Text'
 
 const AppBar = ({ text }) => {
   return (
