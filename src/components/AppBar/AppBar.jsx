@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     paddingBottom: 10,
-    backgroundColor: theme.elevation[1],
-  }
+    backgroundColor: theme.elevation[3],
+  },
 })
 
 const AppBar = () => {

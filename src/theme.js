@@ -3,9 +3,9 @@ const theme = {
     textPrimary: '#EAEAEA',
     textSecondary: '#C3C3C3',
     textDark: '#222',
-    primary: '#B5A2FA',
+    primary: ['#B5A2FA', '#AE9CF0'],
     borderColor: '#444',
-    debugBorder: '#cc888850'
+    debugBorder: '#cc888850',
   },
   fontSizes: {
     body: 14,
@@ -18,7 +18,7 @@ const theme = {
     normal: '400',
     bold: '700',
   },
-  elevation: ['#121212', '#1A1A1A'],
+  elevation: ['#121212', '#1A1A1A', '#202020', '#252525'],
 }
 
 export default theme

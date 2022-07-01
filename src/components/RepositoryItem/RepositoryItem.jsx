@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image } from 'react-native'
-import Text from '../Text'
+import Text from '../utils/Text'
 import Subheading from '../Subheading'
 import StatBar from './StatBar'
 import theme from '../../theme'
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 15,
     paddingVertical: 10,
+    marginHorizontal: 10,
   },
   header: {
     display: 'flex',
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   language: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.primary[0],
     padding: 4,
     borderRadius: 3,
     marginVertical: 5,

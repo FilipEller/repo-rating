@@ -1,4 +1,4 @@
-import Text from './Text'
+import Text from './utils/Text'
 
 const Subheading = props => {
   return <Text bold fontSize='subheading' {...props}></Text>
