@@ -1,0 +1,1 @@
+This application uses https://github.com/fullstack-hy2020/rate-repository-api as its backend.
