@@ -6,13 +6,9 @@ import { StatusBar } from 'expo-status-bar'
 import Main from './src/components/Main'
 import createApolloClient from './src/utils/apolloClient'
 
-import Constants from 'expo-constants'
-
-
 const apolloClient = createApolloClient()
 
 const App = () => {
-  console.log('CONSTANTS', Constants.manifest)
   return (
     <>
       <NativeRouter>

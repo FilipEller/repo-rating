@@ -17,9 +17,6 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarItem text={'Repositories'} route={'/'} />
         <AppBarItem text={'Sign in'} route={'/signin'} />
-        {/* <AppBarItem text={'Profile'} route={'/signin'} />
-        <AppBarItem text={'Settings'} route={'/signin'} />
-        <AppBarItem text={'About'} route={'/signin'} /> */}
       </ScrollView>
     </View>
   )
