@@ -16,9 +16,12 @@ const RepositoryList = () => {
   const { repositories } = useRepositories()
   console.log('REPOSITORIES', repositories)
 
-  const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
-    : []
+  const repositoryNodes =
+    repositories && repositories.edges
+      ? repositories.edges.map(edge => edge.node)
+      : []
+
+  console.log('NODES', repositoryNodes)
 
   return (
     <FlatList
