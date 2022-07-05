@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
 
 const backgroundColorPressed = theme.elevation[0]
 
-const AppBar = ({ text, route }) => {
+const AppBar = ({ text, route, onPress }) => {
   return (
     <View style={styles.item}>
       <Link
         to={route}
         style={styles.link}
-        underlayColor={backgroundColorPressed}>
+        underlayColor={backgroundColorPressed}
+        onPress={onPress}>
         <Text>{text}</Text>
       </Link>
     </View>
