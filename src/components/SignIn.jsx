@@ -1,4 +1,5 @@
 import { View, StyleSheet } from 'react-native'
+import { useNavigate } from 'react-router-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
 
 const SignIn = () => {
   const [signIn] = useSignIn()
+  const navigate = useNavigate()
 
   const initialValues = {
     username: '',
@@ -28,7 +30,8 @@ const SignIn = () => {
     const { username, password } = values
 
     try {
-      const { data } = await signIn({ username, password })
+      const data = await signIn({ username, password })
+      navigate('/')
       console.log(data)
     } catch (e) {
       console.log(e)
