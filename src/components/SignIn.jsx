@@ -17,25 +17,10 @@ const styles = StyleSheet.create({
   },
 })
 
-const SignIn = () => {
-  const [signIn] = useSignIn()
-  const navigate = useNavigate()
-
+export const SignInContainer = ({ onSubmit }) => {
   const initialValues = {
     username: '',
     password: '',
-  }
-
-  const onSubmit = async values => {
-    const { username, password } = values
-
-    try {
-      const data = await signIn({ username, password })
-      navigate('/')
-      console.log(data)
-    } catch (e) {
-      console.log(e)
-    }
   }
 
   const validationSchema = yup.object().shape({
@@ -57,6 +42,25 @@ const SignIn = () => {
       )}
     </Formik>
   )
+}
+
+const SignIn = () => {
+  const [signIn] = useSignIn()
+  const navigate = useNavigate()
+
+  const onSubmit = async values => {
+    const { username, password } = values
+
+    try {
+      const data = await signIn({ username, password })
+      navigate('/')
+      console.log(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  return <SignInContainer onSubmit={onSubmit} />
 }
 
 export default SignIn
