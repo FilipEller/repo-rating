@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, showLink }) => {
   return (
     <View style={styles.container} testID='repositoryItem'>
       <View style={styles.header}>
@@ -67,6 +67,7 @@ const RepositoryItem = ({ item }) => {
         </View>
       </View>
       <StatBar item={item} />
+      {showLink && <Text>{item.language}</Text>}
     </View>
   )
 }
