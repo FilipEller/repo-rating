@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import { REPOSITORY_DETAILS } from './fragments'
+import { REPOSITORY_DETAILS, REVIEW_DETAILS } from './fragments'
 
 export const GET_REPOSITORIES = gql`
   query Repositories {
@@ -21,9 +21,17 @@ export const GET_REPOSITORY = gql`
     repository(id: $repositoryId) {
       ...RepositoryDetails
       url
+      reviews {
+        edges {
+          node {
+            ...ReviewDetails
+          }
+        }
+      }
     }
   }
   ${REPOSITORY_DETAILS}
+  ${REVIEW_DETAILS}
 `
 
 export const GET_ACCOUNT = gql`

@@ -1,7 +1,7 @@
 import { StyleSheet, View, Dimensions } from 'react-native'
 import { Route, Routes, Navigate } from 'react-router-native'
 
-import Subheading from './Subheading'
+import Subheading from './utils/Subheading'
 import AppBar from './AppBar/AppBar'
 import SignIn from './SignIn'
 import RepositoryView from './RepositoryView'

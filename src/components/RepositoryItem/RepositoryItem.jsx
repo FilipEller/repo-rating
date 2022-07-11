@@ -2,7 +2,7 @@ import { View, StyleSheet, Image } from 'react-native'
 import * as Linking from 'expo-linking'
 
 import Text from '../utils/Text'
-import Subheading from '../Subheading'
+import Subheading from '../utils/Subheading'
 import StatBar from './StatBar'
 import theme from '../../theme'
 import Button from '../utils/Button'
@@ -86,7 +86,7 @@ const RepositoryItem = ({ item }) => {
       <StatBar item={item} />
       {item.url && (
         <Button
-          text={'Open in Github'}
+          text={'Open in GitHub'}
           onPress={() => Linking.openURL(item.url)}
         />
       )}
