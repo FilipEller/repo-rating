@@ -1,8 +1,11 @@
 import { View, StyleSheet, Image } from 'react-native'
+import * as Linking from 'expo-linking'
+
 import Text from '../utils/Text'
 import Subheading from '../Subheading'
 import StatBar from './StatBar'
 import theme from '../../theme'
+import Button from '../utils/Button'
 
 const styles = StyleSheet.create({
   container: {
@@ -45,9 +48,23 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingHorizontal: 7,
   },
+  loading: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 })
 
-const RepositoryItem = ({ item, showLink }) => {
+const RepositoryItem = ({ item }) => {
+  if (!item) {
+    return (
+      <View
+        style={{ ...styles.container, ...styles.loading }}
+        testID='repositoryItem'>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container} testID='repositoryItem'>
       <View style={styles.header}>
@@ -67,7 +84,12 @@ const RepositoryItem = ({ item, showLink }) => {
         </View>
       </View>
       <StatBar item={item} />
-      {showLink && <Text>{item.language}</Text>}
+      {item.url && (
+        <Button
+          text={'Open in Github'}
+          onPress={() => Linking.openURL(item.url)}
+        />
+      )}
     </View>
   )
 }
