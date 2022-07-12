@@ -31,7 +31,10 @@ const AppBar = () => {
             <AppBarItem text={'Sign out'} route={'/'} onPress={signOut} />
           </>
         ) : (
-          <AppBarItem text={'Sign in'} route={'/signin'} />
+          <>
+            <AppBarItem text={'Sign in'} route={'/signin'} />
+            <AppBarItem text={'Sign up'} route={'/signup'} />
+          </>
         )}
       </ScrollView>
     </View>

@@ -74,7 +74,12 @@ const AddReview = () => {
     try {
       const { data } = await mutate({
         variables: {
-          review: { repositoryName, ownerName, rating: Number(rating), text },
+          review: {
+            repositoryName,
+            ownerName,
+            rating: isNaN(parseInt(rating)) ? 0 : parseInt(rating),
+            text,
+          },
         },
       })
       navigate(`/repositories/${data.createReview.repositoryId}`)
