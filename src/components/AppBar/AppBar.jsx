@@ -9,7 +9,8 @@ import useSignOut from '../../hooks/useSignOut'
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Constants.statusBarHeight,
+    marginTop: Constants.statusBarHeight,
+    paddingTop: 5,
     paddingBottom: 3,
     backgroundColor: theme.elevation[3],
   },
@@ -25,7 +26,10 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarItem text={'Repositories'} route={'/'} />
         {isLoggedIn ? (
-          <AppBarItem text={'Sign out'} route={'/'} onPress={signOut} />
+          <>
+            <AppBarItem text={'Create a review'} route={'/review'} />
+            <AppBarItem text={'Sign out'} route={'/'} onPress={signOut} />
+          </>
         ) : (
           <AppBarItem text={'Sign in'} route={'/signin'} />
         )}

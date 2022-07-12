@@ -1,8 +1,8 @@
 import { StyleSheet, View, Dimensions } from 'react-native'
 import { Route, Routes, Navigate } from 'react-router-native'
 
-import Subheading from './utils/Subheading'
 import AppBar from './AppBar/AppBar'
+import AddReview from './AddReview'
 import SignIn from './SignIn'
 import RepositoryView from './RepositoryView'
 import theme from '../theme'
@@ -32,11 +32,9 @@ const Main = () => {
     <View>
       <AppBar />
       <View style={styles.container}>
-        <Subheading color='primary' style={styles.heading}>
-          Rate Repository Application
-        </Subheading>
         <Routes>
           <Route path='/' element={<RepositoryList />} exact />
+          <Route path='/review' element={<AddReview />} exact />
           <Route path='/signin' element={<SignIn />} exact />
           <Route path='/repositories/:id' element={<RepositoryView />} exact />
           <Route path='*' element={<Navigate to='/' replace />} />

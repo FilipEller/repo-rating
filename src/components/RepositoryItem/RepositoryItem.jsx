@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   },
   property: {
     paddingBottom: 5,
-    flexShrink: 1,
     flex: 1,
     flexWrap: 'wrap',
   },
