@@ -84,10 +84,9 @@ const RepositoryItem = ({ item }) => {
       </View>
       <StatBar item={item} />
       {item.url && (
-        <Button
-          text={'Open in GitHub'}
-          onPress={() => Linking.openURL(item.url)}
-        />
+        <Button onPress={() => Linking.openURL(item.url)}>
+          Open in GitHub
+        </Button>
       )}
     </View>
   )

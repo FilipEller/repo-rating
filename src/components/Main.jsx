@@ -14,17 +14,12 @@ const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 15,
     flexGrow: 1,
     flexShrink: 1,
     backgroundColor: theme.elevation[0],
     width,
     height,
     paddingBottom: 50,
-  },
-  heading: {
-    alignSelf: 'center',
-    paddingBottom: 15,
   },
 })
 

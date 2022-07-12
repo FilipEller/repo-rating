@@ -10,12 +10,17 @@ import { CREATE_USER } from '../graphql/mutations'
 import FormikTextInput from './utils/FormikTextInput'
 import theme from '../theme'
 import Button from './utils/Button'
+import Subheading from './utils/Subheading'
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.elevation[1],
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 10,
+  },
+  heading: {
+    paddingBottom: 10,
+    alignSelf: 'center',
   },
 })
 
@@ -50,13 +55,16 @@ export const SignUpContainer = ({ onSubmit }) => {
       validationSchema={validationSchema}>
       {({ handleSubmit }) => (
         <View style={styles.container}>
+          <Subheading style={styles.heading} color='primary'>
+            Sign up
+          </Subheading>
           <FormikTextInput name='username' placeholder='Username' />
           <FormikTextInput name='password' placeholder='Password' />
           <FormikTextInput
             name='passwordConfirmation'
             placeholder='Confirm password'
           />
-          <Button onPress={handleSubmit} text='Sign up' />
+          <Button onPress={handleSubmit}>Sign up</Button>
         </View>
       )}
     </Formik>

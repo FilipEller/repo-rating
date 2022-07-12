@@ -8,12 +8,17 @@ import useSignIn from '../hooks/useSignIn'
 import FormikTextInput from './utils/FormikTextInput'
 import theme from '../theme'
 import Button from './utils/Button'
+import Subheading from './utils/Subheading'
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.elevation[1],
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 10,
+  },
+  heading: {
+    paddingBottom: 10,
+    alignSelf: 'center',
   },
 })
 
@@ -35,9 +40,12 @@ export const SignInContainer = ({ onSubmit }) => {
       validationSchema={validationSchema}>
       {({ handleSubmit }) => (
         <View style={styles.container}>
+          <Subheading style={styles.heading} color='primary'>
+            Sign in
+          </Subheading>
           <FormikTextInput name='username' placeholder='Username' />
           <FormikTextInput name='password' placeholder='Password' />
-          <Button onPress={handleSubmit} text='Sign in' />
+          <Button onPress={handleSubmit}>Sign in</Button>
         </View>
       )}
     </Formik>
@@ -52,9 +60,8 @@ const SignIn = () => {
     const { username, password } = values
 
     try {
-      const data = await signIn({ username, password })
+      await signIn({ username, password })
       navigate('/')
-      console.log(data)
     } catch (e) {
       console.log(e)
     }

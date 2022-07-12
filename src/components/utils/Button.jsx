@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Button = ({ onPress, text, style, textStyle, ...props }) => {
+const Button = ({ onPress, style, textStyle, ...props }) => {
   const buttonStyle = [styles.button, style]
   const labelStyle = [styles.label, textStyle]
 
@@ -28,7 +28,7 @@ const Button = ({ onPress, text, style, textStyle, ...props }) => {
       {...props}
       underlayColor='#333'>
       <Text style={labelStyle} color='dark'>
-        {text}
+        {props.children}
       </Text>
     </Pressable>
   )
