@@ -31,7 +31,7 @@ const MyReviews = () => {
     <View style={styles.container}>
       <FlatList
         data={reviews}
-        renderItem={({ item }) => <ReviewItem item={item} />}
+        renderItem={({ item }) => <ReviewItem item={item} showRepoName />}
         keyExtractor={({ id }) => id}
         ItemSeparatorComponent={ItemSeparator}
       />

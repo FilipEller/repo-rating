@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const ReviewItem = ({ item }) => {
+const ReviewItem = ({ item, showRepoName }) => {
   if (!item || !Object.keys(item).length) {
     return (
       <View style={styles.container}>
@@ -57,7 +57,9 @@ const ReviewItem = ({ item }) => {
       </View>
       <View style={styles.body}>
         <View style={styles.header}>
-          <Subheading>{item.user.username}</Subheading>
+          <Subheading>
+            {showRepoName ? item.repository?.fullName : item.user.username}
+          </Subheading>
           <Text>{format(new Date(item.createdAt), 'd.M.yyyy')}</Text>
         </View>
         <Text color='secondary'>{item.text}</Text>
