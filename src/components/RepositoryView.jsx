@@ -6,7 +6,11 @@ import ReviewItem from './ReviewItem'
 import useRepository from '../hooks/useRepository'
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 10,
+  },
   header: {
+    paddingTop: 10,
     paddingBottom: 10,
   },
   separator: {
@@ -30,17 +34,19 @@ const RepositoryView = () => {
   const ItemSeparator = () => <View style={styles.separator} />
 
   return (
-    <FlatList
-      data={reviewNodes}
-      renderItem={({ item }) => <ReviewItem item={item} />}
-      keyExtractor={({ id }) => id}
-      ListHeaderComponent={() => (
-        <View style={styles.header}>
-          <RepositoryItem item={repository} />
-        </View>
-      )}
-      ItemSeparatorComponent={ItemSeparator}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={reviewNodes}
+        renderItem={({ item }) => <ReviewItem item={item} />}
+        keyExtractor={({ id }) => id}
+        ListHeaderComponent={
+          <View style={styles.header}>
+            <RepositoryItem item={repository} />
+          </View>
+        }
+        ItemSeparatorComponent={ItemSeparator}
+      />
+    </View>
   )
 }
 

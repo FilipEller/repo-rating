@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    marginHorizontal: 10,
   },
   header: {
     display: 'flex',

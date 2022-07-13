@@ -4,10 +4,15 @@ import { REPOSITORY_DETAILS, REVIEW_DETAILS } from './fragments'
 
 export const GET_REPOSITORIES = gql`
   query Repositories(
+    $searchKeyword: String
     $orderBy: AllRepositoriesOrderBy
     $orderDirection: OrderDirection
   ) {
-    repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
+    repositories(
+      orderBy: $orderBy
+      orderDirection: $orderDirection
+      searchKeyword: $searchKeyword
+    ) {
       totalCount
       edges {
         node {

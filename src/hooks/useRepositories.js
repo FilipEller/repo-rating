@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/client'
 
 import { GET_REPOSITORIES } from '../graphql/queries'
 
-const useRepositories = ({ sorting }) => {
-  const variables = (() => {
+const useRepositories = ({ searchKeyword, sorting }) => {
+  const sortingMethod = (() => {
     switch (sorting) {
       case 'Latest repositories':
         return { orderBy: 'CREATED_AT', orderDirection: 'DESC' }
@@ -16,11 +16,8 @@ const useRepositories = ({ sorting }) => {
     }
   })()
 
-  console.log(sorting)
-  console.log(variables)
-
   const { data, loading, refetch } = useQuery(GET_REPOSITORIES, {
-    variables,
+    variables: { searchKeyword, ...sortingMethod },
     fetchPolicy: 'cache-and-network',
   })
 

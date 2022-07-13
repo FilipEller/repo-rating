@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { Component, useState } from 'react'
 import { FlatList, View, StyleSheet, Pressable } from 'react-native'
 import { useNavigate } from 'react-router-native'
-import { Menu } from 'react-native-paper'
+import { Menu, Searchbar } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useDebounce } from 'use-debounce'
 
 import useRepositories from '../hooks/useRepositories'
 import RepositoryItem from './RepositoryItem/RepositoryItem'
@@ -13,18 +14,21 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
-  container: { marginBottom: 50 },
+  container: { marginTop: 10, marginBottom: 5, marginHorizontal: 10 },
+  searchBar: {
+    backgroundColor: theme.elevation[1],
+    color: theme.colors.textPrimary,
+    borderColor: theme.colors.borderColor,
+    borderWidth: 1,
+  },
   anchor: {
     borderRadius: 5,
-    paddingHorizontal: 15,
     paddingVertical: 10,
-    marginHorizontal: 10,
-    alignSelf: 'center',
+    paddingHorizontal: 16,
     display: 'flex',
     flexDirection: 'row',
-  },
-  menuContainer: {
-    alignSelf: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 5,
   },
   menu: {
     marginTop: 35,
@@ -40,67 +44,83 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-export const RepositoryListContainer = ({
-  repositories,
-  sort,
-  sorting,
-  setSorting,
-}) => {
-  const navigate = useNavigate()
-  const [visible, setVisible] = useState(false)
+export class RepositoryListContainer extends Component {
+  render() {
+    const {
+      repositories,
+      sort,
+      sorting,
+      setSorting,
+      navigate,
+      visible,
+      setVisible,
+      searchKeyword,
+      setSearchKeyword,
+    } = this.props
 
-  const repositoryNodes =
-    repositories && repositories.edges
-      ? repositories.edges.map(edge => edge.node)
-      : []
-  const openMenu = () => setVisible(true)
-  const closeMenu = () => setVisible(false)
+    const repositoryNodes =
+      repositories && repositories.edges
+        ? repositories.edges.map(edge => edge.node)
+        : []
+    const openMenu = () => setVisible(true)
+    const closeMenu = () => setVisible(false)
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.menuContainer}>
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          style={styles.menu}
-          contentStyle={styles.menuItem}
-          anchor={
-            <Pressable onPress={openMenu} style={styles.anchor}>
-              <Subheading color='primary'>{sorting}</Subheading>
-              <Ionicons
-                name={'caret-down-outline'}
-                size={13}
-                color={theme.colors.primary[0]}
-                style={styles.menuIcon}
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={repositoryNodes}
+          ItemSeparatorComponent={ItemSeparator}
+          renderItem={({ item }) => {
+            return (
+              <Pressable onPress={() => navigate(`/repositories/${item.id}`)}>
+                <RepositoryItem item={item} key={item.id} />
+              </Pressable>
+            )
+          }}
+          ListHeaderComponent={
+            <View>
+              <Searchbar
+                placeholder='Search'
+                onChangeText={text => setSearchKeyword(text)}
+                value={searchKeyword}
+                style={styles.searchBar}
+                theme={{ colors: { text: theme.colors.textPrimary } }}
+                placeholderTextColor={theme.colors.textPrimary}
               />
-            </Pressable>
-          }>
-          {Object.keys(sort).map(key => (
-            <Menu.Item
-              key={key}
-              onPress={() => {
-                setVisible(false)
-                setSorting(sort[key])
-              }}
-              title={sort[key]}
-              theme={{ colors: { text: theme.colors.textPrimary } }}
-            />
-          ))}
-        </Menu>
+              <Menu
+                visible={visible}
+                onDismiss={closeMenu}
+                style={styles.menu}
+                contentStyle={styles.menuItem}
+                anchor={
+                  <Pressable onPress={openMenu} style={styles.anchor}>
+                    <Subheading color='primary'>{sorting}</Subheading>
+                    <Ionicons
+                      name={'caret-down-outline'}
+                      size={13}
+                      color={theme.colors.primary[0]}
+                      style={styles.menuIcon}
+                    />
+                  </Pressable>
+                }>
+                {Object.keys(sort).map(key => (
+                  <Menu.Item
+                    key={key}
+                    onPress={() => {
+                      setVisible(false)
+                      setSorting(sort[key])
+                    }}
+                    title={sort[key]}
+                    theme={{ colors: { text: theme.colors.textPrimary } }}
+                  />
+                ))}
+              </Menu>
+            </View>
+          }
+        />
       </View>
-      <FlatList
-        data={repositoryNodes}
-        ItemSeparatorComponent={ItemSeparator}
-        renderItem={({ item }) => {
-          return (
-            <Pressable onPress={() => navigate(`/repositories/${item.id}`)}>
-              <RepositoryItem item={item} key={item.id} />
-            </Pressable>
-          )
-        }}
-      />
-    </View>
-  )
+    )
+  }
 }
 
 const RepositoryList = () => {
@@ -111,8 +131,15 @@ const RepositoryList = () => {
   }
 
   const [sorting, setSorting] = useState(sort.latest)
+  const navigate = useNavigate()
+  const [visible, setVisible] = useState(false)
+  const [searchKeyword, setSearchKeyword] = useState('')
+  const [debouncedSearch] = useDebounce(searchKeyword, 500)
 
-  const { repositories } = useRepositories({ sorting })
+  const { repositories } = useRepositories({
+    sorting,
+    searchKeyword: debouncedSearch,
+  })
 
   return (
     <RepositoryListContainer
@@ -120,6 +147,11 @@ const RepositoryList = () => {
       sort={sort}
       sorting={sorting}
       setSorting={setSorting}
+      navigate={navigate}
+      visible={visible}
+      setVisible={setVisible}
+      searchKeyword={searchKeyword}
+      setSearchKeyword={setSearchKeyword}
     />
   )
 }
