@@ -41,7 +41,6 @@ export const GET_REPOSITORY = gql`
   query Repository($repositoryId: ID!, $first: Int, $after: String) {
     repository(id: $repositoryId) {
       ...RepositoryDetails
-      url
       reviews(first: $first, after: $after) {
         ...ReviewConnectionDetails
       }

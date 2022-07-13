@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   const signOut = useSignOut()
   const { data } = useQuery(GET_CURRENT_USER)
-  console.log('user data', data)
   const isLoggedIn = data ? Boolean(data.me) : false
 
   return (

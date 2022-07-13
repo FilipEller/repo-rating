@@ -15,16 +15,34 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'center',
   },
+  error: {
+    backgroundColor: theme.colors.error[0],
+  },
+  errorPressed: {
+    backgroundColor: theme.colors.error[1],
+  },
 })
 
-const Button = ({ onPress, style, textStyle, ...props }) => {
-  const buttonStyle = [styles.button, style]
+const Button = ({
+  onPress,
+  style,
+  textStyle,
+  pressedStyle,
+  error,
+  ...props
+}) => {
+  const buttonStyle = error
+    ? [styles.button, styles.error, style]
+    : [styles.button, style]
   const labelStyle = [styles.label, textStyle]
+  const clickStyle = error
+    ? [styles.pressed, styles.errorPressed, pressedStyle]
+    : [styles.pressed, pressedStyle]
 
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [...buttonStyle, pressed && styles.pressed]}
+      style={({ pressed }) => [...buttonStyle, pressed && clickStyle]}
       {...props}
       underlayColor='#333'>
       <Text style={labelStyle} color='dark'>

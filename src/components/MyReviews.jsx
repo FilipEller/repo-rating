@@ -1,8 +1,10 @@
 import { FlatList, View, StyleSheet } from 'react-native'
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
+import { useNavigate } from 'react-router-native'
 
 import ReviewItem from './RepositoryView/ReviewItem'
 import { GET_CURRENT_USER } from '../graphql/queries'
+import { DELETE_REVIEW } from '../graphql/mutations'
 
 const styles = StyleSheet.create({
   container: {
@@ -20,10 +22,22 @@ const styles = StyleSheet.create({
 const MyReviews = () => {
   const ItemSeparator = () => <View style={styles.separator} />
 
-  const { data } = useQuery(GET_CURRENT_USER, {
+  const navigate = useNavigate()
+  const [mutate] = useMutation(DELETE_REVIEW)
+
+  const { data, refetch } = useQuery(GET_CURRENT_USER, {
     variables: { includeReviews: true },
     fetchPolicy: 'cache-and-network',
   })
+
+  const viewRepository = id => {
+    navigate(`/repositories/${id}`)
+  }
+
+  const deleteReview = id => {
+    mutate({ variables: { id } })
+    refetch()
+  }
 
   const reviews = data?.me.reviews.edges.map(edge => edge.node)
 
@@ -31,7 +45,14 @@ const MyReviews = () => {
     <View style={styles.container}>
       <FlatList
         data={reviews}
-        renderItem={({ item }) => <ReviewItem item={item} showRepoName />}
+        renderItem={({ item }) => (
+          <ReviewItem
+            item={item}
+            viewRepository={viewRepository}
+            deleteReview={deleteReview}
+            showActions
+          />
+        )}
         keyExtractor={({ id }) => id}
         ItemSeparatorComponent={ItemSeparator}
       />

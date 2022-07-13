@@ -11,6 +11,7 @@ export const REPOSITORY_DETAILS = gql`
     forksCount
     reviewCount
     ratingAverage
+    url
   }
 `
 
@@ -25,9 +26,10 @@ export const REVIEW_DETAILS = gql`
       username
     }
     repository {
-      fullName
+      ...RepositoryDetails
     }
   }
+  ${REPOSITORY_DETAILS}
 `
 
 export const PAGE_INFO_DETAILS = gql`
