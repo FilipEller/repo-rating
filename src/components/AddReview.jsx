@@ -57,7 +57,7 @@ export const AddReviewContainer = ({ onSubmit }) => {
             placeholder='Rating between 0 and 100'
           />
           <FormikTextInput multiline name='text' placeholder='Review' />
-          <Button onPress={handleSubmit} text='Create a review' />
+          <Button onPress={handleSubmit}>Create a review</Button>
         </View>
       )}
     </Formik>

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+  container: { marginBottom: 50 },
   anchor: {
     borderRadius: 5,
     paddingHorizontal: 15,
@@ -39,16 +40,14 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-export const RepositoryListContainer = ({ repositories }) => {
-  const sort = {
-    latest: 'Latest repositories',
-    highest: 'Highest rated repositories',
-    lowest: 'Lowest rated repositories',
-  }
-
+export const RepositoryListContainer = ({
+  repositories,
+  sort,
+  sorting,
+  setSorting,
+}) => {
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
-  const [sorting, setSorting] = useState(sort.latest)
 
   const repositoryNodes =
     repositories && repositories.edges
@@ -58,7 +57,7 @@ export const RepositoryListContainer = ({ repositories }) => {
   const closeMenu = () => setVisible(false)
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.menuContainer}>
         <Menu
           visible={visible}
@@ -105,9 +104,24 @@ export const RepositoryListContainer = ({ repositories }) => {
 }
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories()
+  const sort = {
+    latest: 'Latest repositories',
+    highest: 'Highest rated repositories',
+    lowest: 'Lowest rated repositories',
+  }
 
-  return <RepositoryListContainer repositories={repositories} />
+  const [sorting, setSorting] = useState(sort.latest)
+
+  const { repositories } = useRepositories({ sorting })
+
+  return (
+    <RepositoryListContainer
+      repositories={repositories}
+      sort={sort}
+      sorting={sorting}
+      setSorting={setSorting}
+    />
+  )
 }
 
 export default RepositoryList
