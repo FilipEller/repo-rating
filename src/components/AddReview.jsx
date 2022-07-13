@@ -7,13 +7,18 @@ import * as yup from 'yup'
 import FormikTextInput from './utils/FormikTextInput'
 import theme from '../theme'
 import Button from './utils/Button'
+import Subheading from './utils/Subheading'
 import { CREATE_REVIEW } from '../graphql/mutations'
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.elevation[1],
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 10,
+  },
+  heading: {
+    paddingBottom: 10,
+    alignSelf: 'center',
   },
 })
 
@@ -44,6 +49,9 @@ export const AddReviewContainer = ({ onSubmit }) => {
       validationSchema={validationSchema}>
       {({ handleSubmit }) => (
         <View style={styles.container}>
+          <Subheading style={styles.heading} color='primary'>
+            Create a review
+          </Subheading>
           <FormikTextInput
             name='ownerName'
             placeholder='Repository owner name'

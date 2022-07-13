@@ -3,6 +3,7 @@ import { useQuery, useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-native'
 
 import ReviewItem from './RepositoryView/ReviewItem'
+import Subheading from './utils/Subheading'
 import { GET_CURRENT_USER } from '../graphql/queries'
 import { DELETE_REVIEW } from '../graphql/mutations'
 
@@ -11,8 +12,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingTop: 10,
   },
-  header: {
+  heading: {
     paddingBottom: 10,
+    alignSelf: 'center',
   },
   separator: {
     height: 10,
@@ -63,6 +65,11 @@ const MyReviews = () => {
         )}
         keyExtractor={({ id }) => id}
         ItemSeparatorComponent={ItemSeparator}
+        ListHeaderComponent={
+          <Subheading style={styles.heading} color='primary'>
+            My reviews
+          </Subheading>
+        }
       />
     </View>
   )
