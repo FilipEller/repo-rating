@@ -8,9 +8,9 @@ import useRepository from '../../hooks/useRepository'
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
+    paddingTop: 10,
   },
   header: {
-    paddingTop: 10,
     paddingBottom: 10,
   },
   separator: {
@@ -18,25 +18,21 @@ const styles = StyleSheet.create({
   },
 })
 
-const RepositoryView = () => {
-  const { id } = useParams()
-  const { repository } = useRepository(id)
+const RepositoryViewContainer = ({ repository, reviews, onEndReach }) => {
+  const ItemSeparator = () => <View style={styles.separator} />
 
   if (!repository) {
-    return <RepositoryItem />
+    return (
+      <View style={styles.container}>
+        <RepositoryItem />
+      </View>
+    )
   }
-
-  const reviewNodes =
-    repository && repository.reviews && repository.reviews.edges
-      ? repository.reviews.edges.map(edge => edge.node)
-      : []
-
-  const ItemSeparator = () => <View style={styles.separator} />
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={reviewNodes}
+        data={reviews}
         renderItem={({ item }) => <ReviewItem item={item} />}
         keyExtractor={({ id }) => id}
         ListHeaderComponent={
@@ -45,8 +41,33 @@ const RepositoryView = () => {
           </View>
         }
         ItemSeparatorComponent={ItemSeparator}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     </View>
+  )
+}
+
+const RepositoryView = () => {
+  const { id } = useParams()
+  const { repository, fetchMore } = useRepository(id)
+
+  const reviews =
+    repository && repository.reviews && repository.reviews.edges
+      ? repository.reviews.edges.map(edge => edge.node)
+      : []
+
+  const onEndReach = () => {
+    console.log('You have reached the end of the list')
+    fetchMore()
+  }
+
+  return (
+    <RepositoryViewContainer
+      reviews={reviews}
+      repository={repository}
+      onEndReach={onEndReach}
+    />
   )
 }
 

@@ -18,10 +18,15 @@ const RepositoryList = () => {
   const [searchKeyword, setSearchKeyword] = useState('')
   const [debouncedSearch] = useDebounce(searchKeyword, 500)
 
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
     sorting,
     searchKeyword: debouncedSearch,
   })
+
+  const onEndReach = () => {
+    console.log('You have reached the end of the list')
+    fetchMore()
+  }
 
   return (
     <>
@@ -35,6 +40,7 @@ const RepositoryList = () => {
         setVisible={setVisible}
         searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
+        onEndReach={onEndReach}
       />
     </>
   )

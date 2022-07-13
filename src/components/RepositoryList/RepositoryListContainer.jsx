@@ -99,7 +99,7 @@ export default class RepositoryListContainer extends Component {
   }
 
   render() {
-    const { repositories, navigate } = this.props
+    const { repositories, navigate, onEndReach } = this.props
 
     const repositoryNodes =
       repositories && repositories.edges
@@ -119,6 +119,8 @@ export default class RepositoryListContainer extends Component {
             )
           }}
           ListHeaderComponent={this.renderHeader}
+          onEndReached={onEndReach}
+          onEndReachedThreshold={0.5}
         />
       </View>
     )

@@ -16,15 +16,32 @@ const useRepositories = ({ searchKeyword, sorting }) => {
     }
   })()
 
-  const { data, loading, refetch } = useQuery(GET_REPOSITORIES, {
-    variables: { searchKeyword, ...sortingMethod },
+  const variables = { searchKeyword, ...sortingMethod, first: 10 }
+
+  const { data, loading, fetchMore, ...result } = useQuery(GET_REPOSITORIES, {
+    variables,
     fetchPolicy: 'cache-and-network',
   })
 
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage
+    if (!canFetchMore) {
+      return
+    }
+
+    fetchMore({
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...variables,
+      },
+    })
+  }
+
   return {
-    repositories: data ? data.repositories : [],
+    repositories: data?.repositories,
     loading,
-    refetch,
+    fetchMore: handleFetchMore,
+    ...result,
   }
 }
 
