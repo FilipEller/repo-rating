@@ -24,7 +24,6 @@ const RepositoryList = () => {
   })
 
   const onEndReach = () => {
-    console.log('You have reached the end of the list')
     fetchMore()
   }
 

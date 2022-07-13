@@ -26,3 +26,28 @@ export const REVIEW_DETAILS = gql`
     }
   }
 `
+
+export const PAGE_INFO_DETAILS = gql`
+  fragment PageInfoDetails on PageInfo {
+    startCursor
+    endCursor
+    hasNextPage
+  }
+`
+
+export const REVIEW_CONNECTION_DETAILS = gql`
+  fragment ReviewConnectionDetails on ReviewConnection {
+    totalCount
+    pageInfo {
+      ...PageInfoDetails
+    }
+    edges {
+      cursor
+      node {
+        ...ReviewDetails
+      }
+    }
+  }
+  ${REVIEW_DETAILS}
+  ${PAGE_INFO_DETAILS}
+`

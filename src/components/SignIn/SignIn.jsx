@@ -63,7 +63,7 @@ const SignIn = () => {
       await signIn({ username, password })
       navigate('/')
     } catch (e) {
-      console.log(e)
+      console.log('Sign in error:', e)
     }
   }
 

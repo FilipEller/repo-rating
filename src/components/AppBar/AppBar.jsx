@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 
 import theme from '../../theme'
 import AppBarItem from './AppBarItem'
-import { GET_ACCOUNT } from '../../graphql/queries'
+import { GET_CURRENT_USER } from '../../graphql/queries'
 import useSignOut from '../../hooks/useSignOut'
 
 const styles = StyleSheet.create({
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const signOut = useSignOut()
-  const { data } = useQuery(GET_ACCOUNT)
+  const { data } = useQuery(GET_CURRENT_USER)
+  console.log('user data', data)
   const isLoggedIn = data ? Boolean(data.me) : false
 
   return (
@@ -28,6 +29,10 @@ const AppBar = () => {
         {isLoggedIn ? (
           <>
             <AppBarItem text={'Create a review'} route={'/review'} />
+            <AppBarItem
+              text={'My reviews'}
+              route={'/myreviews'}
+            />
             <AppBarItem text={'Sign out'} route={'/'} onPress={signOut} />
           </>
         ) : (

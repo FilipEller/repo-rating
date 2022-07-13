@@ -42,6 +42,14 @@ const styles = StyleSheet.create({
 })
 
 const ReviewItem = ({ item }) => {
+  if (!item || !Object.keys(item).length) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.rating}>
