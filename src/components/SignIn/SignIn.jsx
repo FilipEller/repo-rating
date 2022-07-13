@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
-import useSignIn from '../hooks/useSignIn'
+import useSignIn from '../../hooks/useSignIn'
 
-import FormikTextInput from './utils/FormikTextInput'
-import theme from '../theme'
-import Button from './utils/Button'
-import Subheading from './utils/Subheading'
+import FormikTextInput from '../utils/FormikTextInput'
+import theme from '../../theme'
+import Button from '../utils/Button'
+import Subheading from '../utils/Subheading'
 
 const styles = StyleSheet.create({
   container: {

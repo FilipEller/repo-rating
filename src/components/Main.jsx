@@ -3,12 +3,12 @@ import { Route, Routes, Navigate } from 'react-router-native'
 
 import AppBar from './AppBar/AppBar'
 import AddReview from './AddReview'
-import SignIn from './SignIn'
+import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp'
-import RepositoryView from './RepositoryView'
+import RepositoryView from './RepositoryView/RepositoryView'
 import theme from '../theme'
 
-import RepositoryList from './RepositoryList'
+import RepositoryList from './RepositoryList/RepositoryList'
 
 const { width, height } = Dimensions.get('window')
 

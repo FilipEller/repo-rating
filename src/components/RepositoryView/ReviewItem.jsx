@@ -1,9 +1,9 @@
 import { View, StyleSheet } from 'react-native'
 import { format } from 'date-fns'
 
-import Text from './utils/Text'
-import Subheading from './utils/Subheading'
-import theme from '../theme'
+import Text from '../utils/Text'
+import Subheading from '../utils/Subheading'
+import theme from '../../theme'
 
 const ratingWidth = 42
 
