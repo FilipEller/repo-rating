@@ -1,4 +1,4 @@
-import { FlatList, View, StyleSheet } from 'react-native'
+import { FlatList, View, StyleSheet, Alert } from 'react-native'
 import { useQuery, useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-native'
 
@@ -39,6 +39,14 @@ const MyReviews = () => {
     refetch()
   }
 
+  const confirmDelete = id => {
+    Alert.alert(
+      'Delete review',
+      'Are you sure you want to delete this review?',
+      [{ text: 'Cancel' }, { text: 'Delete', onPress: () => deleteReview(id) }]
+    )
+  }
+
   const reviews = data?.me.reviews.edges.map(edge => edge.node)
 
   return (
@@ -49,7 +57,7 @@ const MyReviews = () => {
           <ReviewItem
             item={item}
             viewRepository={viewRepository}
-            deleteReview={deleteReview}
+            deleteReview={confirmDelete}
             showActions
           />
         )}
