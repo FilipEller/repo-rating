@@ -5,7 +5,7 @@ This application is a project built over part 10 of University of Helsinki's [Fu
 ## Getting started
 
 ### Prerequisites
-1. Install Node and npm
+1. Install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 1. The application connects to a [GraphQL API](https://github.com/fullstack-hy2020/rate-repository-api) provided by the course.
 Set up the API and store its address in the file `.env` as `APOLLO_URI` in the project root.
 1. Set up one of the following environments: [Android Studio Emulator](https://docs.expo.dev/workflow/android-studio-emulator/), [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/), or [Expo Go](https://expo.dev/expo-go).
